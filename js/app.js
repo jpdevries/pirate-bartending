@@ -5,14 +5,13 @@ $(document).ready(function() {
   var customers = [];
   var bartender = new barTender();
   console.log(bartender);
-  window.setInterval(bartender.response, 3000);
 
   $("form").submit(function(event) {
     event.preventDefault();
 
     var getId = $(this).attr("id").replace("customer", "");
     var customer_order = new order(parseInt(getId), $(this).serializeArray());
-    
+
     customer[getId].request(customer_order);
   });
 
@@ -41,6 +40,8 @@ customer.prototype.receive = function(drink) {
 
 var barTender = function() {
   this.orders = [];
+
+  window.setInterval(this.response.bind(this), 3000);
 };
 
 barTender.prototype.response = function() {
